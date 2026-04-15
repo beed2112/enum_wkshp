@@ -25,17 +25,11 @@ COPY content/ftp/welcome.txt /srv/ftp/welcome.txt
 COPY content/samba/public/readme.txt /srv/samba/public/readme.txt
 COPY mysql_setup.sql /mysql_setup.sql
 COPY redis_flag.txt /redis_flag.txt
-
 RUN chmod +x /start.sh \
-    && mkdir -p /run/mysqld /var/run/sshd /srv/ftp /srv/samba/public \
+    && mkdir -p /run/mysqld /var/run/sshd /srv/ftp /srv/samba/public /var/lib/mysql /var/www/html \
     && chown -R www-data:www-data /var/www/html \
-    && useradd -m -s /bin/bash student || true \
-    && echo 'student:student' | chpasswd \
-    && (useradd -M -s /usr/sbin/nologin ftpuser || true) \
-    && echo 'ftpuser:student' | chpasswd \
-    && chown -R ftpuser:ftpuser /srv/ftp \
-    && (echo -ne 'student\nstudent\n' | smbpasswd -a -s student) \
-    && mysql_install_db --user=mysql --ldata=/var/lib/mysql || true
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+     
 
 EXPOSE 21 80 139 445 161/udp 3306 6379
 
