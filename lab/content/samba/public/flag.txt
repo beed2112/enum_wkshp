@@ -1,0 +1,1 @@
+enum-wkshp{smb_share_enumerated}

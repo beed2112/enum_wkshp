@@ -1,0 +1,5 @@
+Welcome to the Docker Enumeration Lab FTP service.
+
+Credentials:
+- username: ftpuser
+- password: student

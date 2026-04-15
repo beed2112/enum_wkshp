@@ -1,0 +1,17 @@
+services:
+  enumtarget:
+    build:
+      context: ./lab
+    container_name: enumlab-target
+    hostname: enumlab-target
+    restart: unless-stopped
+    networks:
+      enumlab_net:
+        ipv4_address: 172.28.21.12
+
+networks:
+  enumlab_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.21.0/24
