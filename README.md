@@ -9,7 +9,7 @@ This version avoids host port conflicts by running all services inside one conta
 
 ## Quick start
 ```bash
-git clone <REPO_URL>
+git clone https://github.com/beed2112/enum_wkshp.git
 cd docker-enum-lab-single-target
 docker compose up --build -d
 docker compose ps
