@@ -34,7 +34,7 @@ If `docker-compose-v2` is not available on your Kali build, install the compose 
 ## 2) Clone the repo
 
 ```bash
-git clone <REPO_URL>
+git clone https://github.com/beed2112/enum_wkshp.git
 cd docker-enum-lab-single-target
 ```
 
