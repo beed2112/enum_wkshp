@@ -19,6 +19,7 @@ COPY start.sh /start.sh
 COPY vsftpd.conf /etc/vsftpd.conf
 COPY snmpd.conf /etc/snmp/snmpd.conf
 COPY smb.conf /etc/samba/smb.conf
+COPY enumlab.cnf /etc/mysql/mariadb.conf.d/60-enumlab.cnf
 COPY index.html /var/www/html/index.html
 COPY html/flag.txt /var/www/html/flag.txt
 COPY content/ftp/welcome.txt /srv/ftp/welcome.txt
@@ -27,11 +28,10 @@ COPY content/samba/public/readme.txt /srv/samba/public/readme.txt
 COPY content/samba/public/flag.txt /srv/samba/public/flag.txt
 COPY mysql_setup.sql /mysql_setup.sql
 COPY redis_flag.txt /redis_flag.txt
+
 RUN chmod +x /start.sh \
-    && mkdir -p /run/mysqld /var/run/sshd /srv/ftp /srv/samba/public /var/lib/mysql /var/www/html \
-    && chown -R www-data:www-data /var/www/html \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
-     
+    && mkdir -p /run/mysqld /var/lib/mysql /srv/ftp /srv/samba/public /var/www/html \
+    && chown -R www-data:www-data /var/www/html
 
 EXPOSE 21 80 139 445 161/udp 3306 6379
 
