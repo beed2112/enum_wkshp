@@ -2,6 +2,7 @@
 set -e
 
 # mysql / mariadb
+# mysql / mariadb
 mkdir -p /run/mysqld
 mkdir -p /var/lib/mysql
 chown -R mysql:mysql /run/mysqld /var/lib/mysql
@@ -10,11 +11,11 @@ if [ ! -d /var/lib/mysql/mysql ]; then
   mysql_install_db --user=mysql --ldata=/var/lib/mysql || mariadb-install-db --user=mysql --datadir=/var/lib/mysql
 fi
 
-service mariadb start || service mysql start
+service mariadb start || service mysql start || true
 sleep 5
 
-mysqladmin ping -uroot || true
-mysql -uroot < /mysql_setup.sql || true
+mysqladmin --ssl=0 ping -uroot || true
+mysql --ssl=0 -uroot < /mysql_setup.sql || true
 
 # redis
 service redis-server start || true
