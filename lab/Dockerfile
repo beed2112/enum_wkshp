@@ -22,6 +22,7 @@ COPY smb.conf /etc/samba/smb.conf
 COPY index.html /var/www/html/index.html
 COPY html/flag.txt /var/www/html/flag.txt
 COPY content/ftp/welcome.txt /srv/ftp/welcome.txt
+COPY content/ftp/flag.txt /srv/ftp/flag.txt
 COPY content/samba/public/readme.txt /srv/samba/public/readme.txt
 COPY mysql_setup.sql /mysql_setup.sql
 COPY redis_flag.txt /redis_flag.txt
