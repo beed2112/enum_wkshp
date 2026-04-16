@@ -8,6 +8,7 @@ ENV ENUM_TARGET_IP=172.28.21.12 \
     WORDPRESS_DB_HOST=127.0.0.1 \
     WORDPRESS_URL=http://172.28.21.12
 
+COPY archive-keyring.gpg /usr/share/keyrings/kali-archive-keyring.gpg  
 RUN apt-get update && apt-get install -y \
     vsftpd \
     apache2 \
