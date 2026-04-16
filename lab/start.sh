@@ -31,8 +31,14 @@ service smbd start || true
 service nmbd start || true
 
 # ftp
+# ftp
 mkdir -p /srv/ftp
-chown -R ftp:ftp /srv/ftp || true
+chown root:root /srv/ftp
+chmod 555 /srv/ftp
+
+[ -f /srv/ftp/welcome.txt ] && chown root:root /srv/ftp/welcome.txt && chmod 444 /srv/ftp/welcome.txt
+[ -f /srv/ftp/flag.txt ] && chown root:root /srv/ftp/flag.txt && chmod 444 /srv/ftp/flag.txt
+
 /usr/sbin/vsftpd /etc/vsftpd.conf &
 
 echo "[+] Enumeration lab target started."
