@@ -18,12 +18,12 @@ Your scan target for this lab is:
 
 ```bash
 sudo apt update
-sudo apt install -y docker.io git
+sudo apt install -y docker.io docker-compose git
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 newgrp docker
 docker ps
-docker compose version
+docker-compose version
 git --version
 ```
 
@@ -42,7 +42,7 @@ cd enum_wkshp
 ## 3) Build and start the target
 
 ```bash
-docker compose up --build -d
+docker-compose up --build -d
 ```
 
 ---
@@ -50,7 +50,7 @@ docker compose up --build -d
 ## 4) Confirm it is running
 
 ```bash
-docker compose ps
+docker-compose ps
 docker ps
 docker inspect enumlab-target --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
@@ -67,13 +67,13 @@ Expected IP:
 
 ### See container status
 ```bash
-docker compose ps
+docker-compose ps
 ```
 
 ### See logs
 ```bash
-docker compose logs
-docker compose logs -f enumtarget
+docker-compose logs
+docker-compose logs -f enumtarget
 ```
 
 ### Verify the target answers
@@ -88,7 +88,7 @@ ping -c 1 172.28.21.12
 ## 7) Stop the lab
 
 ```bash
-docker compose down
+docker-compose down
 ```
 
 ---
@@ -96,8 +96,8 @@ docker compose down
 ## 8) Remove and rebuild from scratch
 
 ```bash
-docker compose down -v --remove-orphans
-docker compose up --build -d
+docker-compose down -v --remove-orphans
+docker-compose up --build -d
 ```
 
 ---
@@ -113,7 +113,7 @@ docker ps
 
 ### Container did not start
 ```bash
-docker compose logs
+docker-compose logs
 ```
 
 ### Target IP not present
@@ -127,7 +127,7 @@ docker inspect enumlab-target
 ### Ping works but services do not
 Give the services a few more seconds, then run:
 ```bash
-docker compose logs -f enumtarget
+docker-compose logs -f enumtarget
 ```
 
 

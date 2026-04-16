@@ -4,12 +4,12 @@
 ```bash
 git clone https://github.com/beed2112/enum_wkshp.git
 cd enum_wkshp
-docker compose up --build -d
+docker-compose up --build -d
 ```
 
 ## Verify
 ```bash
-docker compose ps
+docker-compose ps
 docker inspect enumlab-target --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ping -c 1 172.28.21.12
 ```
@@ -21,7 +21,7 @@ Enumerate the lab environment
 
 ## Stop
 ```bash
-docker compose down
+docker-compose down
 ```
 
 

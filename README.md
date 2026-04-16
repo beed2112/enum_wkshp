@@ -11,20 +11,20 @@ This version avoids host port conflicts by running all services inside one conta
 ```bash
 git clone https://github.com/beed2112/enum_wkshp.git
 cd enum_wkshp
-docker compose up --build -d
-docker compose ps
+docker-compose up --build -d
+docker-compose ps
 docker inspect enumlab-target --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
 
 ## Stop
 ```bash
-docker compose down
+docker-compose down
 ```
 
 ## Rebuild
 ```bash
-docker compose down -v --remove-orphans
-docker compose up --build -d
+docker-compose down -v --remove-orphans
+docker-compose up --build -d
 ```
 
 
