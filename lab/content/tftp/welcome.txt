@@ -1,0 +1,2 @@
+Welcome to the Enumeration Workshop TFTP service.
+Anonymous read access is enabled for training purposes.

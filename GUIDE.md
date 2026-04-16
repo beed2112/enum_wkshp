@@ -10,7 +10,7 @@ Your scan target for this lab is:
 172.28.21.12
 ```
 
-Do not scan `127.0.0.1` for this lab. Scan the Docker target IP above.
+
 
 ---
 
@@ -18,7 +18,7 @@ Do not scan `127.0.0.1` for this lab. Scan the Docker target IP above.
 
 ```bash
 sudo apt update
-sudo apt install -y docker.io docker-compose-v2 git
+sudo apt install -y docker.io git
 sudo systemctl enable docker --now
 sudo usermod -aG docker $USER
 newgrp docker
@@ -27,7 +27,6 @@ docker compose version
 git --version
 ```
 
-If `docker-compose-v2` is not available on your Kali build, install the compose plugin package your repo offers and verify `docker compose version`.
 
 ---
 

@@ -1,7 +1,12 @@
 CREATE DATABASE IF NOT EXISTS workshop;
+CREATE DATABASE IF NOT EXISTS wordpress;
 
 CREATE USER IF NOT EXISTS 'mysql'@'%' IDENTIFIED BY '';
 GRANT ALL PRIVILEGES ON *.* TO 'mysql'@'%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';
+CREATE USER IF NOT EXISTS 'wordpress'@'%' IDENTIFIED BY 'wordpress';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'%';
 FLUSH PRIVILEGES;
 
 USE workshop;

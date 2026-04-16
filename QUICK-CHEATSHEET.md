@@ -14,9 +14,9 @@ docker inspect enumlab-target --format '{{range .NetworkSettings.Networks}}{{.IP
 ping -c 1 172.28.21.12
 ```
 
-## Use
-```bash
-nmap 
+## Use the lab
+
+Enumerate the lab environment 
 
 
 ## Stop
@@ -29,8 +29,6 @@ docker compose down
 ## Workshop flags
 
 This lab includes simple HTB-style confirmation flags:
-
-```
 
 Flag format:
 ```text
