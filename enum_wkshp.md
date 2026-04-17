@@ -68,18 +68,18 @@ Why is this important?
 ### Passive and active enumeration - what's the difference?
 
 1. Passive Enumeration - Building a dossier on the target
-  a. Social Media
-  b. shodan
-  c. Whois
-  d. Observation
-  e. Listen (wireless/tcpdump/responder)
+  - Social Media
+  - shodan
+  - Whois
+  - Observation
+  - Listen (wireless/tcpdump/responder)
 
 2. Active Enumeration - Executing commands to identify attack surface
-  a. ping
-  b. nmap
-  c. gobuster/ffuf
-  d. nc (banner grabbing)
-  e. service specific tools
+  - ping
+  - nmap
+  - gobuster/ffuf
+  - nc (banner grabbing)
+  - service specific tools
 
 
 ### What are some things we're hoping to find out by enumerating?
