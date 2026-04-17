@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OffSec Mentorship - Workshop - Enumeration Methodology</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #121824;
+      --text: #e6edf3;
+      --muted: #8aa4b8;
+      --accent: #20e3b2;
+      --accent2: #6ee7ff;
+      --warn: #ffb454;
+      --ok: #20e3b2;
+      --danger: #ff6b6b;
+      --glow: #122033;
+      --grid1: rgba(32,227,178,0.06);
+      --grid2: rgba(110,231,255,0.05);
+      --note-bg: #1a1f2b;
+      --note-text: #e6edf3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: radial-gradient(1200px 800px at 70% 10%, var(--glow) 0%, var(--bg) 55%);
+      color: var(--text);
+      overflow: hidden;
+    }
+    .deck { height: 100vh; width: 100vw; position: relative; }
+    .overlay {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(transparent 24px, var(--grid1) 25px),
+        linear-gradient(90deg, transparent 24px, var(--grid2) 25px);
+      background-size: 26px 26px;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+    .slide { position: absolute; inset: 0; padding: 64px 84px; display: none; }
+    .slide.active { display: block; }
+    h1 { font-size: 54px; margin: 0 0 16px 0; color: var(--accent); }
+    h2 { font-size: 40px; margin: 0 0 16px 0; color: var(--accent); }
+    h3 { font-size: 28px; margin: 16px 0 8px 0; color: var(--accent2); }
+    p, li { font-size: 22px; line-height: 1.5; }
+    ul, ol { margin: 0 0 12px 24px; }
+    .panel { background: var(--panel); border: 1px solid #1d2a3a; border-radius: 14px; padding: 18px 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.35); }
+    .note { border-left: 4px solid var(--warn); padding: 10px 12px; background: var(--note-bg); color: var(--note-text); margin: 12px 0; }
+    .note-success { border-left-color: var(--ok); }
+    .note-warning { border-left-color: var(--warn); }
+    .note-danger { border-left-color: var(--danger); }
+    .section { margin: 0 0 6px 0; color: var(--muted); font-size: 18px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .img { max-width: 100%; max-height: 70vh; display: block; margin: 10px auto; border-radius: 12px; border: 1px solid #1d2a3a; }
+    pre { background: #0e1521; border: 1px solid #1f2b3d; border-radius: 10px; padding: 14px; font-size: 16px; color: #d6f5ff; overflow: auto; max-height: 50vh; }
+    code { background: #0e1521; border: 1px solid #1f2b3d; border-radius: 6px; padding: 1px 6px; font-size: 0.95em; color: #d6f5ff; }
+    .footer { position: absolute; bottom: 18px; right: 24px; color: var(--muted); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="overlay"></div>
+    <section class="slide active" id="s1">
+      <h1>OffSec Mentorship - Workshop - Enumeration Methodology</h1>
+      <p class="muted">Use ←/→ or Space to navigate</p>
+      <div class="footer">Slide 1</div>
+    </section>
+
+    <section class="slide active" id="s1">
+      <h2>Agenda</h2>
+      <ul><li>Define</li><li>Passive</li><li>Active</li><li>Commands</li><li>Evolution of Process</li><li>Docker lab</li><li>HTB Server</li></ul><div class="note"><b>Note:</b> Use only with authorized hosts.  Nothing is worth loss of job or freedom</div>
+      <div class="footer">Slide 1</div>
+    </section>
+
+    <section class="slide" id="s2">
+      <h2>Workshop Description</h2>
+      <p>Enumeration is the process of systematically identifying and collecting information about a target system, network, or application, and serves as the bedrock of any successful offensive security assessment. In this hands-on workshop, we will explore both passive and active enumeration techniques, emphasizing their importance in the penetration testing lifecycle. Mentees will learn how to gather critical data—such as open ports, services, users, shares, and network structure—using industry-standard tools and methodologies.</p>
+      <div class="footer">Slide 2</div>
+    </section>
+
+    <section class="slide" id="s3">
+      <h2>Workshop Objectives</h2>
+      <ul><li>Understand the difference between passive and active enumeration, and when to use each approach</li><li>Learn the methodology of thorough enumeration in offensive security engagements</li><li>Gain practical experience with tools like Nmap and Netcat</li><li>Practice structured note taking to support later stages of an assessment</li><li>Discuss real-world scenarios where enumeration set the stage for successful exploitation</li></ul>
+      <div class="footer">Slide 3</div>
+    </section>
+
+    <section class="slide" id="s4">
+      <h2>What to Expect &amp; Goal</h2>
+      <p>This workshop is interactive and beginner-friendly. You’ll participate in guided exercises designed to build your confidence and proficiency with enumeration tools and techniques. By the end of the session, you’ll have a solid foundation in enumeration and be prepared for more advanced offensive security topics in future workshops.</p>
+      <div class="footer">Slide 4</div>
+    </section>
+
+    <section class="slide" id="s5">
+      <h2>What is enumeration?</h2>
+      <p>Enumeration is used to learn more about our target to understand the attack surface, identify potential weaknesses (vulnerabilities) that might expolited to achieve our goal.</p><ul><li>Enumeration is the collection of information on a set of targets, assets, or technologies.</li><li>Properly enumerating an environment should make Penetration Testing or identifying vulnerabilities easier.</li><li>Trying to reveal as much attack surface as possible.</li><li>Enumeration can be done passively and actively.</li></ul><p>Why is this important?</p>
+      <div class="footer">Slide 5</div>
+    </section>
+
+    <section class="slide" id="s6">
+      <h2>Passive and active enumeration - what&#x27;s the difference?</h2>
+      <ol><li>Passive Enumeration - Building a dossier on the target</li></ol><p>a. Social Media</p><p>b. shodan</p><p>c. Whois</p><p>d. Observation</p><p>e. Listen (wireless/tcpdump/responder)</p><ol><li>Active Enumeration - Executing commands to identify attack surface</li></ol><p>a. ping</p><p>b. nmap</p><p>c. gobuster/ffuf</p><p>d. nc (banner grabbing)</p><p>e. service specific tools</p>
+      <div class="footer">Slide 6</div>
+    </section>
+
+    <section class="slide" id="s7">
+      <h2>What are some things we&#x27;re hoping to find out by enumerating?</h2>
+      <ul><li>Subdomains, ports, employer information (emails, logins), exposed passwords (data leaks)</li><li>External attack surface</li><li>Are they in the cloud?</li><li>What type network architecture is in place?</li><li>Do you have an up to date asset list?</li></ul>
+      <div class="footer">Slide 7</div>
+    </section>
+
+    <section class="slide" id="s8">
+      <h2>What are some common tools used to enumerate targets?</h2>
+      <ol><li>Network</li></ol><ul><li>nmap</li><li>masscan/rustscan - the children of nmap</li><li>nc</li><li>tcpdump - wireshark</li><li>responder</li><li>kismet</li></ul><ol><li>Web Application</li></ol><ul><li>Directory/file discovery - gobuster/fuff/dirbuster</li><li>Web Browser Developer tools</li><li>Burpsuite</li></ul><ol><li>Service specific tools</li></ol><ul><li>nxc</li><li>snmpwalk</li><li>ftp</li><li>etc...</li></ul>
+      <div class="footer">Slide 8</div>
+    </section>
+
+    <section class="slide" id="s9">
+      <h2>Nmap Discover Open TCP ports</h2>
+      <p>Discover open TCP ports</p><pre>nmap -sS -Pn -n -T4  -oN ports.txt $TARGET
+</pre><p>Options</p><ul><li>-sS SYN scan (half connect)  &quot;stealthier&quot; requires sudo</li><li>-Pn Don&#x27;t ping just scan  - ICMP sometimes blocked</li><li>-n  No dns lookup &quot;faster&quot; less noise</li><li>-T4 (-T[0-5]  speed/noise/accuracy</li><li>-oN output file name</li></ul><p>| Timing | Speed      | Stealth | Accuracy | Typical Use |</p><p>|--------|-----------|--------|----------|-------------|</p><p>| T0     | 🔴 Very Slow | 🟢 High | 🟢 High | IDS evasion |</p><p>| T1     | 🔴 Slow     | 🟢 High | 🟢 High | Stealth scans |</p><p>| T2     | 🟡 Moderate | 🟡 Medium | 🟢 High | Production-safe |</p><p>| T3     | 🟢 Normal   | 🟡 Medium | 🟢 High | Default |</p><p>| T4     | 🟢 Fast     | 🔴 Low | 🟡 Medium | Pentesting / HTB |</p><p>| T5     | 🚀 Very Fast | 🔴 Very Low | 🔴 Lower | Speed over accuracy |</p>
+      <div class="footer">Slide 9</div>
+    </section>
+
+    <section class="slide" id="s10">
+      <h2>Nmap Scan Open TCP ports</h2>
+      <p>Scan open ports</p><pre>nmap -sS -sV -sC -Pn -n -T4 -p $(tr &#x27;\n&#x27; &#x27;,&#x27; &lt; ports.txt | sed &#x27;s/,$//&#x27;) -oA targeted_scan $TARGET
+</pre><ul><li>-sS SYN scan (half connect)  &quot;stealthier&quot; requires sudo</li><li>-sC run default and safe NSE scripts</li><li>-sV try to determine service version</li><li>-Pn Don&#x27;t ping just scan  - ICMP sometimes blocke</li><li>-p  Scan just these ports</li><li>-n  No dns lookup &quot;faster&quot; less noise</li><li>-T4 (-T[0-5]  speed/noise/accuracy</li><li>-oA output file name</li></ul>
+      <div class="footer">Slide 10</div>
+    </section>
+
+    <section class="slide" id="s11">
+      <h2>Nmap Discover Open UDP ports</h2>
+      <pre>nmap -sU -Pn -n -T2 --top-ports 200 -oN udp_scan.txt $TARGET
+</pre><ul><li>-sU UDP scan requires sudo</li><li>-Pn Don&#x27;t ping just scan  - ICMP sometimes blocke</li><li>-n  No dns lookup &quot;faster&quot; less noise</li><li>-T2 (-T[0-5]  UDP is flakey slow is better</li><li>--top-ports 200 - hit the most used ports - consider antother scan of more ports</li><li>-oN output file name</li></ul>
+      <div class="footer">Slide 11</div>
+    </section>
+
+    <section class="slide" id="s12">
+      <h2>Nmap Scan Open UDP ports</h2>
+      <pre>nmap -sU -sV -Pn -n -T2 -p $(tr &#x27;\n&#x27; &#x27;,&#x27; &lt; udp_ports.txt | sed &#x27;s/,$//&#x27;) -oA udp_targeted $TARGET
+</pre><ul><li>-sU UDP scan requires sudo</li><li>-sC run default and safe NSE scripts</li><li>-sV try to determine service version</li><li>-T2 (-T[0-5]  UDP is flakey slow is better</li><li>-Pn Don&#x27;t ping just scan  - ICMP sometimes blocked</li><li>-p  Scan just these ports</li><li>-n  No dns lookup &quot;faster&quot; less noise</li><li>-oA output file name</li></ul>
+      <div class="footer">Slide 12</div>
+    </section>
+
+    <section class="slide" id="s13">
+      <h2>Figure out what is available to be enumerated &quot;sweepers&quot; 1.</h2>
+      <p>There are times when you need to figure out what to scan:</p><ul><li>scan anything you want</li><li>you are connected to a multi-homed machine</li></ul><p>Ping sweep time!</p><p>powershell</p><pre>1..254 | ForEach-Object -Parallel {
+    $ip = &quot;192.168.0.$_&quot;
+    if (Test-Connection -ComputerName $ip -Count 1 -Quiet) {
+        &quot;$ip is up&quot;
+    }
+} -ThrottleLimit 50
+</pre>
+      <div class="footer">Slide 13</div>
+    </section>
+
+    <section class="slide" id="s14">
+      <h2>Figure out what is available to be enumerated &quot;sweepers&quot; 2.</h2>
+      <p>Ping sweep time!</p><p>cmd.exe CLI</p><pre>for /L %i in (1,1,254) do @ping -n 1 -w 300 192.168.0.%i &gt;nul &amp;&amp; echo alive: 192.168.0.%i
+</pre><p>cmd.exe BAT extra %</p><pre>for /L %%i in (1,1,254) do @ping -n 1 -w 300 192.168.0.%%i &gt;nul &amp;&amp; echo alive: 192.168.0.%%i
+</pre>
+      <div class="footer">Slide 14</div>
+    </section>
+
+    <section class="slide" id="s15">
+      <h2>Figure out what is available to be enumerated &quot;sweepers&quot; 3.</h2>
+      <p>Ping sweep time!</p><p>bash</p><pre>for i in {1..254}; do   (ping -c 1 192.168.0.$i &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo &quot;alive: 192.168.0.$i&quot;) ; done
+</pre><p>xargs</p><pre>seq 1 254 | xargs -P 50 -I{} bash -c &#x27;ping -c 1 -W 1 192.168.0.{} &gt;/dev/null 2&gt;&amp;1 &amp;&amp; echo 192.168.0.{}&#x27;
+</pre>
+      <div class="footer">Slide 15</div>
+    </section>
+
+    <section class="slide" id="s16">
+      <h2>Now that we found it -  &quot;knockers&quot; 1.</h2>
+      <p>no nmap can&#x27;t install it -- live off the land</p><p>powershell</p><pre>
+$target = &quot;192.168.0.253&quot;
+
+1..10000 | ForEach-Object {
+    $port = $_
+    try {
+        $client = New-Object System.Net.Sockets.TcpClient
+        $iar = $client.BeginConnect($target, $port, $null, $null)
+        $success = $iar.AsyncWaitHandle.WaitOne(100)
+
+        if ($success -and $client.Connected) {
+            Write-Host &quot;OPEN: $target`:$port&quot;
+            $client.Close()
+        }
+    } catch {}
+}
+</pre>
+      <div class="footer">Slide 16</div>
+    </section>
+
+    <section class="slide" id="s17">
+      <h2>Now that we found it -  &quot;knockers&quot; 2.</h2>
+      <p>bash</p><pre>for port in {1..10000}; do
+  nc -zv 192.168.0.253 $port 2&gt;&amp;1 | grep succeeded
+done
+</pre><p>xargs</p><pre>seq 1 10000 | xargs -P 50 -I{} bash -c &#x27;nc -z -w1 192.168.0.252 {} 2&gt;/dev/null &amp;&amp; echo &quot; {}&quot;&#x27;
+</pre>
+      <div class="footer">Slide 17</div>
+    </section>
+
+    <section class="slide" id="s18">
+      <h2>Now that we found it -  &quot;knockers&quot; 3.</h2>
+      <p>udp -- best effort doesn&#x27;t get any better this way</p><pre>
+nc -u -z -w1 192.168.0.250 161
+Connection to 192.168.0.250 161 port [udp/snmp] succeeded!
+</pre>
+      <div class="footer">Slide 18</div>
+    </section>
+
+    <section class="slide" id="s19">
+      <h2>Evolution of the process</h2>
+      <p>Making life easier by complicating it</p><ul><li>tee command</li><li>date <code>date +&quot;%y-%m-%d %H:%M:%S&quot;</code></li><li>aliases</li><li>functions</li></ul>
+      <div class="footer">Slide 19</div>
+    </section>
+
+    <section class="slide" id="s20">
+      <h2>Let&#x27;s play.</h2>
+      <p>Will walk thru setting up a Docker container that we can use to get familiar with the process</p>
+      <div class="footer">Slide 20</div>
+    </section>
+
+  </div>
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    let idx = 0;
+
+    function show(i) {
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+      history.replaceState(null, '', '#s' + (idx + 1));
+    }
+
+    function fromHash() {
+      const m = location.hash.match(/#s(\d+)/);
+      if (!m) return;
+      const n = parseInt(m[1], 10) - 1;
+      if (!Number.isNaN(n)) show(n);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        show(idx + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        show(idx - 1);
+      }
+    });
+
+    window.addEventListener('hashchange', fromHash);
+    if (!location.hash || location.hash === '#') {
+      history.replaceState(null, '', '#s1');
+    }
+    fromHash();
+  </script>
+</body>
+</html>
