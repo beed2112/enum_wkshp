@@ -15,6 +15,9 @@ docker-compose up --build -d
 docker-compose ps
 docker inspect enumlab-target --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 ```
+## Check it
+`ping -c 3 172.28.21.12`
+
 
 ## Stop
 ```bash
