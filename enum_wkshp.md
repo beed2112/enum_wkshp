@@ -18,9 +18,7 @@
 
 
 
-:::info
-Use only with authorized hosts.  Nothing is worth loss of job or freedom
-:::
+
 
 
 ### Agenda 
@@ -33,9 +31,7 @@ Use only with authorized hosts.  Nothing is worth loss of job or freedom
 - Docker lab
 - HTB Server 
 
-:::info
-Use only with authorized hosts.  Nothing is worth loss of job or freedom
-:::
+
 
 ### Workshop Description
 
